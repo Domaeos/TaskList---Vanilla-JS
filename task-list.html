@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <wrapper>
+        <div class="theme_selector">
+            <input type="checkbox" name="theme_select" class="theme_select">
+        </div>
+        <section class="app">
+            <div class="theme__selector">
+                
+            </div>
+            <div class="header">
+                <h3>Task List</h3>
+            </div>
+            <div class="task__list">
+
+            </div>
+            <form name="create__form" id="input__form">
+                <div class="action__bar">
+                    <button class="button large" type="button" id="voice__button"><i
+                            class="fa-solid fa-microphone"></i></button>
+                    <input class="user__input" required type="text"
+                        placeholder="Insert a task with a minimum of 10 characters">
+                    <button type="submit" id="submit__button" class="button large submit create"><i
+                            class="fa-regular fa-plus"></i></button>
+                </div>
+            </form>
+        </section>
+    </wrapper>
+    <footer>
+
+        <div class="footer">
+            <p>Created by Ryan (github.com/Domaeos)</p>
+        </div>
+
+    </footer>
+    <style>
+        :root {
+            --primary-color: #0D1B2ADD;
+            --background-color: #1B263B;
+            --background-img-light: url("5.jpg");
+            --background-img-dark: url("3.jpg");
+            --median-color: #415A77;
+            --secondary-color: #E0E1DD;
+            --ternary-color: #778DA9;
+        }
+
+        i {
+            pointer-events: none;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            color: var(--secondary-color);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .theme_selector {
+            display: grid;
+            height: 100px;
+            grid-template-columns: 1fr;
+            align-items: end;
+            justify-items: end;
+            padding: 15px;
+        }
+        .divider {
+            align-self: start;
+            border: 0;
+            overflow: hidden;
+            background-color: radial-gradient(rgb(97, 122, 171) 0%, transparent 40%);
+        }
+
+        div.footer p {
+            padding-top: 50px;
+            font-size: 12px;
+            padding-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+       
+
+        h3 {
+            border-bottom: 2px solid linear-gradient(to bottom, #181818, #eee, #181818) 1 100%;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 75px;
+            color: var(--ternary-color);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .user__input {
+            box-sizing: content-box;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 5px;
+            border: none;
+            background-color: var(--background-color);
+        }
+
+        .user__input:focus {
+            outline: none;
+            border: 2px solid var(--secondary-color);
+        }
+
+        body {
+            margin: 0;
+            background-image: var(--background-img-dark);
+            background-position: bottom right;
+            background-size: cover;
+            display: grid;
+            width: 100vw;
+            height: 100vh;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+            justify-items: center;
+            align-items: start;
+            color: var(--primary-color);
+        }
+
+        .task__item:last-child {
+            padding-bottom: 20px;
+        }
+
+        .app {
+            
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr 40px;
+            /* box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            */
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 5px;
+            min-width: 800px;
+            min-height: 60vh;
+            background-color: var(--primary-color);
+            max-width: 1200px;
+            padding: 25px;
+        }
+
+        .task__list {
+            display: grid;
+            
+            grid-template-columns: 1fr auto auto auto;
+            grid-template-rows: repeat(auto-fill, minmax(30px, auto));
+            align-content: center;
+            padding: 15px;
+        }
+
+
+        /*
+        .welcome__screen {
+
+
+        }
+
+        .task__item:hover {
+            transform: scale(1.05);
+        }
+        */
+
+        .task__item {
+            transition: all 0.2s;
+            font-size: 20px;
+
+        
+            text-indent: 10px
+        }
+
+        .task__item:nth-of-type(odd) {
+            background-color: var(--primary-color);
+        }
+        .task__item:nth-of-type(odd):hover {
+            background-color: var(--ternary-color);
+        }
+        .task__item:nth-of-type(2n) {
+            background-color: var(--median-color)
+        }
+        .task__item:nth-of-type(2n):hover {
+            background-color: var(--ternary-color);
+        }
+
+        .action__bar {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: auto 1fr auto;
+        }
+
+        .task__item.completed {
+            background-color: greenyellow;
+            color: var(--primary-color);
+            text-decoration: line-through;
+        }
+
+        /* Buttons */
+
+        button {
+            border-radius: 5px;
+            align-self: center;
+            font-size: 15px;
+            padding: 5px;
+            background-color: var(--median-color);
+            box-shadow: 0px 6px 7px 0px var(--primary-color);
+            border: none;
+        }
+
+        .fa-circle {
+            color: red;
+        }
+
+        p {
+
+            word-break: break-all;
+            white-space: normal;
+        }
+
+        button.small {
+            color: white;
+            background: none;
+            font-size: 20px;
+            align-content: center;
+        }
+
+        button.large {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        const userInput = document.querySelector(".user__input");
+        const taskList = document.querySelector(".task__list");
+        const submitButton = document.querySelector("#submit__button");
+        let storedTasks = JSON.parse(localStorage.getItem("stored__tasks")) || [];
+        const inputForm = document.querySelector("#input__form")
+        const voiceButton = document.querySelector("#voice__button");
+        const themeStyle = document.querySelector(":root");
+        const themeSelector = document.querySelector(".theme_select");
+        const documentBody = document.querySelector("body");
+
+
+        // <i class="fa-duotone fa-microphone-slash"></i> no recorder
+        // <i class="fa-regular fa-pen-to-square"></i> edit
+
+        inputForm.addEventListener("submit", handleSubmit);
+        taskList.addEventListener("click", actionClick);
+        voiceButton.addEventListener("click", getSpeech);
+        themeSelector.addEventListener("change", handleTheme);
+
+        // Speech Recognition boolean
+
+        const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        // TODO: Maybe can get firefox to work? Seems to have property but refuses to log
+        // any events or transcripts result via both listener or .onresult / .result
+        // Most firefox browsers have it disabled by default anyway so this should go straight
+        // to console error.
+
+        function handleTheme (e) {
+            /*:root {
+            --primary-color: #0D1B2ADD;
+            --background-color: #1B263B;
+            --background-img: url("3.jpg");
+            --median-color: #415A77;
+            --secondary-color: #E0E1DD;
+            --ternary-color: #778DA9;
+        }
+        */
+            if (e.srcElement.checked) {
+                themeStyle.style.setProperty("--primary-color", "#0D1B2ADD");
+                themeStyle.style.setProperty("--secondary-color", "#1B263B");
+                themeStyle.style.setProperty("--background-color", "#415A77");
+                themeStyle.style.setProperty("--ternary-color", "#E0E1DD");
+                themeStyle.style.setProperty("--median-color", "#778DA9")
+
+
+                documentBody.style.setProperty("background-image", "var(--background-img-dark)");
+            } else {
+                documentBody.style.setProperty("background-image", "var(--background-img-light)");
+
+
+                themeStyle.style.setProperty("--primary-color", "#C3A995DD");
+                themeStyle.style.setProperty("--secondary-color", "#AB947E");
+                themeStyle.style.setProperty("--background-color", "#6F5E53");
+                themeStyle.style.setProperty("--ternary-color", "#8A7968");
+                themeStyle.style.setProperty("--median-color", "#593D3B");
+            }
+        }
+
+
+        function getSpeech() {
+
+            if (SpeechRecognition) {
+                const recognition = new SpeechRecognition();
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+                const voiceIcon = voiceButton.querySelector("i");
+
+
+                voiceButton.innerHTML = `<i class="fa-solid fa-circle"></i>`
+                recognition.onresult = (event) => {
+                    userInput.value = event.results[0][0].transcript
+                }
+                recognition.onspeechend = () => {
+                    recognition.stop();
+                    voiceButton.innerHTML = `<i
+                            class="fa-solid fa-microphone"></i>`;
+                }
+                recognition.start();
+
+            } else {
+
+                voiceButton.disabled = true;
+
+                console.error("No speech recognition detected. Firefox?")
+
+            }
+        }
+
+        // Functions
+
+        // Handle submit event differently based on currently editing or not
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            if (e.submitter.classList.contains("create")) {
+
+                const taskID = Math.round((Math.random() * 10000));
+                storedTasks.push({ taskID, task: userInput.value, completed: false });
+                userInput.value = "";
+                updateLocalStorage();
+                createHTML(storedTasks);
+
+            } else {
+
+                pushEdit();
+                editSubmitButton("create");
+
+            }
+        }
+
+        function getIndex(dataID) {
+            const index = storedTasks.findIndex(task => {
+                return task.taskID === dataID;
+            });
+            return index;
+        }
+
+        // Commit the change to HTML and storage
+        function pushEdit() {
+            const hiddenID = inputForm.querySelector("input[name='hidden-task-id'")
+            const editID = parseInt(hiddenID.value);
+
+            const index = getIndex(editID);
+
+            updateHTML("edit", editID, userInput.value);
+
+            storedTasks[index].task = userInput.value;
+            updateLocalStorage();
+            hiddenID.remove();
+            userInput.value = "";
+        }
+
+
+        // Handle different actions of edit, create, delete
+        function actionClick({ target }) {
+            if (!target.classList.contains("button")) return;
+            const dataID = parseInt(target.dataset.id)
+            if (target.dataset.type === "edit") {
+
+                editSubmitForm(dataID);
+                editSubmitButton("edit");
+
+            } else if (target.dataset.type === "delete") {
+
+                const index = getIndex(dataID);
+
+                updateHTML("delete", dataID);
+                delete storedTasks[index];
+
+                // Remove null element from array left via Delete
+                // Could have got round this with splice I guess
+                storedTasks = storedTasks.filter(element => element);
+                updateLocalStorage();
+
+                if (!storedTasks.length) createHTML();
+
+            } else {
+
+                const index = getIndex(dataID);
+                storedTasks[index].completed = !storedTasks[index].completed
+                updateLocalStorage();
+                updateHTML("completed", dataID)
+
+            }
+        }
+
+        function editSubmitButton(newAction) {
+
+            if (newAction === "edit") {
+
+                submitButton.classList.remove("create");
+                submitButton.classList.add("edit");
+                submitButton.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>`;
+
+
+            } else {
+
+                submitButton.classList.remove("edit");
+                submitButton.classList.add("create");
+                submitButton.innerHTML = `<i class="fa-regular fa-plus"></i>`
+
+            }
+        }
+
+        // Change the user input form at bottom when editing an item
+        function editSubmitForm(id) {
+
+            userInput.focus();
+
+            const taskToEdit = storedTasks.find(task => {
+                return task.taskID == id;
+            })
+
+            const hiddenID = document.createElement("input");
+            hiddenID.setAttribute("type", "hidden");
+            hiddenID.setAttribute("name", "hidden-task-id");
+            hiddenID.setAttribute("value", `${id}`);
+            inputForm.appendChild(hiddenID);
+            userInput.value = taskToEdit.task;
+
+        }
+
+        function updateLocalStorage() {
+            const tasksStringified = JSON.stringify(storedTasks);
+            localStorage.setItem("stored__tasks", tasksStringified);
+
+        }
+
+
+
+        function updateHTML(action, id, newTaskValue = null) {
+
+            if (action === "delete") {
+
+                // CSS transitions to be included
+
+                const deleteElements = taskList.querySelectorAll(`[data-id='${id}']`);
+                deleteElements.forEach(element => element.remove());
+
+            } else {
+
+                element = taskList.querySelector(`.task__item[data-id='${id}']`);
+                elementParagraph = element.querySelector("p");
+
+                if (action === "edit") {
+
+                    elementParagraph.textContent = newTaskValue;
+
+                } else {
+
+                    element.classList.contains("completed") ?
+                        element.classList.remove("completed") :
+                        element.classList.add("completed");
+                }
+            }
+        }
+
+        function createHTML(arr = []) {
+            let html = "";
+            if (arr.length) {
+
+                arr.forEach(obj => {
+                    const taskID = obj["taskID"];
+                    const task = obj["task"];
+                    const completed = obj["completed"];
+                    html += `<div class="task__item ${(completed) ? "completed" : ""}" data-id="${taskID}"><p class="task__text">${task}</p></div>
+                    <button class="button small action" data-type="edit" data-id="${taskID}"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="button small action" data-type="delete" data-id="${taskID}"><i class="fa-sharp fa-solid fa-trash"></i></button>
+                    <button class="button small action" data-type="Complete" data-id="${taskID}"><i class="fa-solid fa-check"></i></button>
+                    `;
+                });
+
+            } else {
+
+                html = `<div class="welcome__screen">Create a task</div>`
+
+            }
+
+            taskList.innerHTML = html;
+
+        }
+        function onLoad() {
+            (!storedTasks.length) ? createHTML() : createHTML(storedTasks);
+        }
+
+
+        onLoad();
+
+    </script>
+    <script src="https://kit.fontawesome.com/ec3f7848cf.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
