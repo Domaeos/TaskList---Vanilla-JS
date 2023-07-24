@@ -12,7 +12,7 @@
 <body>
     <wrapper>
         <div class="theme_selector">
-            <input type="checkbox" name="theme_select" class="theme_select">
+            <input type="checkbox" checked name="theme_select" class="theme_select">
         </div>
         <section class="app">
             <div class="theme__selector">
@@ -159,20 +159,13 @@
 
         /*
         .welcome__screen {
-
-
-        }
-
-        .task__item:hover {
-            transform: scale(1.05);
-        }
         */
 
         .task__item {
+            display: grid;
             transition: all 0.2s;
             font-size: 20px;
-
-        
+            align-content: center;
             text-indent: 10px
         }
 
@@ -224,10 +217,15 @@
         }
 
         button.small {
-            color: white;
-            background: none;
+            color: white;   
             font-size: 20px;
             align-content: center;
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        button.small.action:hover {
+            color: white;
         }
 
         button.large {
@@ -267,15 +265,7 @@
         // to console error.
 
         function handleTheme (e) {
-            /*:root {
-            --primary-color: #0D1B2ADD;
-            --background-color: #1B263B;
-            --background-img: url("3.jpg");
-            --median-color: #415A77;
-            --secondary-color: #E0E1DD;
-            --ternary-color: #778DA9;
-        }
-        */
+            
             if (e.srcElement.checked) {
                 themeStyle.style.setProperty("--primary-color", "#0D1B2ADD");
                 themeStyle.style.setProperty("--secondary-color", "#1B263B");
